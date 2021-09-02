@@ -42,3 +42,9 @@ class JsonManifest:
     
     def updateKeys(self):
         self.keys = set(self.translations.keys())
+
+    def toJson(self):
+        return {
+            "file": self.file,
+            "language": self.language
+        }

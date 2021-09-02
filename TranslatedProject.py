@@ -1,6 +1,5 @@
 from JsonManifest import JsonManifest
 
-
 class TranslatedProject:
 
     def __init__(self, name, basePath):
@@ -66,3 +65,13 @@ class TranslatedProject:
 
     def getChanges(self):
         return self.changes
+    
+    def toJson(self):
+        translations = {}
+        for lang, translation in self.translations.items():
+            translations[lang] = translation.toJson()
+
+        return {
+            "name": self.name,
+            "translations": translations
+        }

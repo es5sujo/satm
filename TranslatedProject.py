@@ -5,7 +5,7 @@ class TranslatedProject:
     def __init__(self, name, basePath):
         self.name = name
         self.basePath = basePath
-        self.translations = {}
+        self.translations: dict[str, JsonManifest] = {}
         self._newTerms = []
         self.changes = 0
     
@@ -70,6 +70,7 @@ class TranslatedProject:
         translations = {}
         for lang, translation in self.translations.items():
             translations[lang] = translation.toJson()
+            translation.saveManifest()
 
         return {
             "name": self.name,

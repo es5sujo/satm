@@ -4,7 +4,7 @@ import os.path
 
 class JsonManifest:
     def __init__(self, language: str):
-        self.file = None
+        self.file: str = None
         self.translations = None
         self.keys = None
         self.language = language
@@ -18,6 +18,13 @@ class JsonManifest:
         translations = json.loads(file_data)
         self.translations = translations
         self.updateKeys()
+    
+    def saveManifest(self):
+        if not os.path.isfile(self.file):
+            raise Exception(f"Could not file {self.file}")
+        file_handle = open(self.file, "w")
+        json_str = json.dumps(self.translations)
+        file_handle.write(json_str)
     
     def compare(self, other):
         return (self.keys - other.keys, other.keys - self.keys)
